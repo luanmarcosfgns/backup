@@ -1,12 +1,20 @@
 <?php
 
 
+$arquivo = fopen('.env', 'r');
+$linhas='';
+while(!feof($arquivo))
+$linhas .= fgets($arquivo, 1024);
+fclose($arquivo);
+foreach (json_decode($linhas) as $linha) {
+
+
 // Parametros para serem setados
-$username="root";
-$password="root";
-$database="database";
-$host="localhost";
-$diretorio =getcwd().'/dumps/';
+$username=$linha->username;
+$password=$linha->password;
+$database=$linha->database;
+$host=$linha->host;
+$diretorio =$linha->diretorio;
 
 //data do evento
 $date=date("Y-m-d-H-i-s");
@@ -65,3 +73,4 @@ fwrite($fp, $exec);
 
 //Fecha o arquivo.
 	fclose($fp);
+}
