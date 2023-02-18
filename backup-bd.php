@@ -2,9 +2,9 @@
 
 
 $arquivo = fopen('.env', 'r');
-$linhas='';
-while(!feof($arquivo))
-$linhas .= fgets($arquivo, 1024);
+$linhas = '';
+while (!feof($arquivo))
+    $linhas .= fgets($arquivo, 1024);
 fclose($arquivo);
 foreach (json_decode($linhas) as $linha) {
     try {
@@ -65,8 +65,8 @@ foreach (json_decode($linhas) as $linha) {
         $exec .= '5. apagado ' . $file . "\r\n";
 
 
-    }catch (Exception $e){
-        $exec .= '6. erro no database ' . $linha->database.'Mensagem'.$e->getMessage().'linha:'.$e->getLine(). "\r\n";
+    } catch (Exception $e) {
+        $exec .= '6. erro no database ' . $linha->database . 'Mensagem' . $e->getMessage() . 'linha:' . $e->getLine() . "\r\n";
         //Variável $fp armazena a conexão com o arquivo e o tipo de ação.
         $fp = fopen($diretorio . 'backup.log', "a+");
 
@@ -75,14 +75,52 @@ foreach (json_decode($linhas) as $linha) {
 
 //Fecha o arquivo.
         fclose($fp);
-    continue;
+        continue;
     }
     //Variável $fp armazena a conexão com o arquivo e o tipo de ação.
     $fp = fopen($diretorio . 'backup.log', "a+");
 
 //Escreve no arquivo aberto.
     fwrite($fp, $exec);
+    apagarArquvosAntigos($linha->diretorio);
 
-//Fecha o arquivo.
-    fclose($fp);
+}
+function apagarArquvosAntigos($arquivo)
+{
+    try {
+        // Define o diretório a ser verificado e limpo
+        $dir = $arquivo;
+
+// Define a data limite para manter os arquivos (30 dias atrás)
+        $date_limit = strtotime('-30 days');
+
+// Percorre todos os arquivos do diretório
+        foreach (glob($dir . '/*.zip') as $file) {
+            // Verifica se o arquivo é um arquivo regular (não é diretório)
+            if (is_file($file)) {
+                // Verifica a extensão do arquivo
+                $ext = pathinfo($file, PATHINFO_EXTENSION);
+
+                // Verifica se a extensão é ZIP
+                if ($ext == 'zip') {
+                    // Verifica a data de modificação do arquivo
+                    $mod_date = filemtime($file);
+
+                    // Se a data de modificação for anterior à data limite, deleta o arquivo
+                    if ($mod_date < $date_limit) {
+                        unlink($file);
+                        echo "Arquivo $file apagado com sucesso.<br>";
+                    }
+                }
+            }
+        }
+    } catch (Exception $exception) {
+        $exec .= '6. erro no database ' . $linha->database . 'Mensagem' . $e->getMessage() . 'linha:' . $e->getLine() . "\r\n";
+        //Variável $fp armazena a conexão com o arquivo e o tipo de ação.
+        $fp = fopen($diretorio . 'backup.log', "a+");
+        //escreve no arquivo
+        fwrite($fp, $exec);
+        //Fecha o arquivo.
+        fclose($fp);
+    }
 }
