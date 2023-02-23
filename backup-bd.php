@@ -1,8 +1,15 @@
 <?php
 
-
-$arquivo = fopen('.env', 'r');
 $linhas = '';
+
+$arquivo = fopen('/home/backupDumps/backup-Master/.env', 'r');
+
+if (empty($arquivo)) {
+    print "Arquivo não encontrado /n";
+    die();
+
+}
+
 while (!feof($arquivo))
     $linhas .= fgets($arquivo, 1024);
 fclose($arquivo);
@@ -14,6 +21,7 @@ foreach (json_decode($linhas) as $linha) {
         $database = $linha->database;
         $host = $linha->host;
         $diretorio = $linha->diretorio;
+        apagarArquvosAntigos($linha);
 
 //data do evento
         $date = date("Y-m-d-H-i-s");
@@ -82,17 +90,17 @@ foreach (json_decode($linhas) as $linha) {
 
 //Escreve no arquivo aberto.
     fwrite($fp, $exec);
-    apagarArquvosAntigos($linha->diretorio);
+
 
 }
-function apagarArquvosAntigos($arquivo)
+function apagarArquvosAntigos($linha)
 {
     try {
         // Define o diretório a ser verificado e limpo
-        $dir = $arquivo;
+        $dir = $linha->diretorio;
 
 // Define a data limite para manter os arquivos (30 dias atrás)
-        $date_limit = strtotime('-30 days');
+        $date_limit = strtotime('-2 days');
 
 // Percorre todos os arquivos do diretório
         foreach (glob($dir . '/*.zip') as $file) {
