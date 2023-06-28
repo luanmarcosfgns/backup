@@ -120,14 +120,16 @@ class CompressionDirectoryService
     {
         foreach ($files as $file) {
             $zip = new ZipArchive;
-            $zip->open($file . ' .zip', ZipArchive::CREATE);
+            $zip->open($file . '.zip', ZipArchive::CREATE);
             $zip->addFile(
                 __APP__ . '/storage/dumps/'.$file,
                 $file
             );
 
+
 // Fecha a pasta e salva o arquivo
             $zip->close();
+            rename(__APP__ .'/'.$file.'.zip',__APP__ . '/storage/dumps/'.$file.'.zip');
         }
 
     }
