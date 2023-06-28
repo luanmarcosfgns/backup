@@ -14,9 +14,10 @@ class BackupDirectoryService
         $listFiles = [];
         $directories = explode(",", $_ENV['BACKUP_DIRECTORIES']);
         foreach ($directories as $directory) {
-            $listFiles[] = self::listFiles($directory);
+            $listFiles = self::listFiles($directory);
+            CompressionDirectoryService::compressDirectory($listFiles);
         }
-        dd($listFiles);
+
 
     }
 
@@ -34,7 +35,7 @@ class BackupDirectoryService
 
             if (is_dir($path)) {
                 // It's a directory, recursively call the function to list files inside this directory
-                $subdirectoryFiles = listFiles($path);
+                $subdirectoryFiles = self::listFiles($path);
 
                 // Add the found files to the files array
                 $files = array_merge($files, $subdirectoryFiles);

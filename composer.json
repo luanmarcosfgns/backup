@@ -1,22 +1,24 @@
 {
-    "name": "luanmarcos/backup",
-    "description": "Sistema de backup para colocar como serviço ou cronologia de serviços",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Luanmarcos\\Backup\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "luanmarcos",
-            "email": "luanmarcosfgns@gmail.com"
-        }
-    ],
-    "require": {
-        "vlucas/phpdotenv": "^5.5",
-        "analog/analog": "^1.0",
-        "larapack/dd": "^1.1"
+  "name": "luanmarcos/backup",
+  "description": "Sistema de backup para colocar como serviço ou cronologia de serviços",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Luanmarcos\\Backup\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "luanmarcos",
+      "email": "luanmarcosfgns@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.5",
+    "analog/analog": "^1.0",
+    "larapack/dd": "^1.1",
+    "ext-zip": "*",
+    "google/apiclient": "^2.15"
+  }
 }
