@@ -20,10 +20,10 @@ class Main
 {
     public static function exec()
     {
-        ini_set('memory_limit', '4000M');
         VariableSystem::set();
         $dotenv = Dotenv::createMutable(__DIR__);
         $dotenv->safeLoad();
+        ini_set('memory_limit', $_ENV['MEMORY_LIMIT']);
         BackupDatabaseService::load();
         CompressionDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
