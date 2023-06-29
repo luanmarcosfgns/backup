@@ -4,7 +4,7 @@ require "src/Util/VariableSystem.php";
 require "src/Service/CompressionDirectoryService.php";
 require "src/Service/SelectFileFoldersService.php";
 require "src/Service/BackupDirectoryService.php";
-require "src/Service/SendFileGoogleDriveService.php";
+
 
 use Analog\Analog;
 use Analog\Handler\FirePHP;
@@ -30,5 +30,6 @@ class Main
         SelectFileFoldersService::deleteFilesSQL(__APP__ . '/storage/dumps');
         BackupDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
+        SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/files');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use DirectoryIterator;
 use Exception;
 
 class SelectFileFoldersService
@@ -32,6 +33,19 @@ class SelectFileFoldersService
                 }
             }
 
+        }
+    }
+
+    public static function permanenceArchives(string $directory)
+    {
+        $iterator = new DirectoryIterator($directory);
+        $now = time();
+        $expirationTime = $now - (10 * 24 * 60 * 60); // 10 days in seconds
+
+        foreach ($iterator as $fileInfo) {
+            if ($fileInfo->isFile() && $fileInfo->getMTime() < $expirationTime) {
+                unlink($fileInfo->getPathname());
+            }
         }
     }
 }
