@@ -1,3 +1,6 @@
 /vendor/
-/.env
-/storage/files/*
+.env
+/storage/files/
+/storage/dumps/
+/storage/log/
+/storage/send/

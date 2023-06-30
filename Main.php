@@ -4,6 +4,7 @@ require "src/Util/VariableSystem.php";
 require "src/Service/CompressionDirectoryService.php";
 require "src/Service/SelectFileFoldersService.php";
 require "src/Service/BackupDirectoryService.php";
+require "src/Service/SendGoogleDriveArchive.php";
 
 
 use Analog\Analog;
@@ -13,6 +14,7 @@ use App\Service\BackupDirectoryService;
 use App\Service\CompressionDirectoryService;
 use App\Service\SelectFileFoldersService;
 use App\Service\SendFileGoogleDriveService;
+use App\Service\SendGoogleDriveArchive;
 use App\Util\VariableSystem;
 use Dotenv\Dotenv;
 
@@ -20,10 +22,10 @@ class Main
 {
     public static function exec()
     {
-        ini_set('memory_limit', '4000M');
         VariableSystem::set();
         $dotenv = Dotenv::createMutable(__DIR__);
         $dotenv->safeLoad();
+        ini_set('memory_limit', $_ENV['MEMORY_LIMIT']);
         BackupDatabaseService::load();
         CompressionDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
@@ -31,5 +33,7 @@ class Main
         BackupDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
         SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/files');
+        SendGoogleDriveArchive::store();
+        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files',__APP__ . '/storage/send', );
     }
 }

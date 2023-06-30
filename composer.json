@@ -16,7 +16,6 @@
   ],
   "require": {
     "vlucas/phpdotenv": "^5.5",
-    "analog/analog": "^1.0",
     "larapack/dd": "^1.1",
     "ext-zip": "*",
     "google/apiclient": "^2.15"
