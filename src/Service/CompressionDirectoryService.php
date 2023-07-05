@@ -91,7 +91,7 @@ class CompressionDirectoryService
 
         }
         $zip->close();
-        rename(__APP__ .$zipFile, __APP__ . '/storage/dumps/' . $zipFile);
+        rename(__APP__ .'/'.$zipFile, __APP__ . '/storage/dumps/' . $zipFile);
     }
 
 
