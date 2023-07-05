@@ -33,9 +33,9 @@ class Main
         BackupDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
         SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/send');
-        SendGoogleDriveArchive::store();
         if ($_ENV["SHARE_GOOGLE_DRIVE"] == "YES") {
-            SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files', __APP__ . '/storage/send',);
+        SendGoogleDriveArchive::store();
+        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files', __APP__ . '/storage/send',);
         }
 
     }
