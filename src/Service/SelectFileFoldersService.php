@@ -40,7 +40,8 @@ class SelectFileFoldersService
     {
         $iterator = new DirectoryIterator($directory);
         $now = time();
-        $expirationTime = $now - (10 * 24 * 60 * 60); // 10 days in seconds
+        $days = empty($_ENV['DAYS']) ? 3 : $_ENV['DAYS'];
+        $expirationTime = $now - ($days * 24 * 60 * 60); // 10 days in seconds
 
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isFile() && $fileInfo->getMTime() < $expirationTime) {
