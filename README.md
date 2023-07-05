@@ -37,3 +37,8 @@ do mesmo arquivo</li>
 <li>Sobre a execução ela pode ser feita de duas formas digitando <b>php -S localhost:8000</b> acessando o mesmo pelo navegador através da URL <b>http://localhost:8000/backup-bd.php </b> ou você pode execultar diretamente via comando: <b>php backup-bd.php</b></li>
 <li>E POR FIM FORTEMENTE RECOMENDO QUE NÃO UTILIZE O APLICATIVO A CÉU ABERTO, OU SEJA, EM REQUISIÇÕES HTTP REMOTAS PUBLICAS OU DE OUTRA FORMA QUE NÃO VENHA TOMAR AS DEVIDAS PRECAUÇÕES POIS O MESMO NÃO POSSUI RESTRIÇÕES DE SEGURANÇA E FORA PENSADO PARA RODAR COMO SERVIÇO OU JOB DE QUALQUER SISTEMA OPERACIONAL</li>
 </ol>
+<ul style="list-style: none">
+<li><b>Autor:</b>Luan Figueira</li>
+<li><b>Email:</b>luanmarcosfgns@gmail</li>
+<li><b>Desenvolvedor Sênior PHP</b></li>
+</ul>

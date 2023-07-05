@@ -32,10 +32,10 @@ class Main
         SelectFileFoldersService::deleteFilesSQL(__APP__ . '/storage/dumps');
         BackupDirectoryService::load();
         SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
-        SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/files');
-        SendGoogleDriveArchive::store();
+        SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/send');
         if ($_ENV["SHARE_GOOGLE_DRIVE"] == "YES") {
-            SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files', __APP__ . '/storage/send',);
+        SendGoogleDriveArchive::store();
+        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files', __APP__ . '/storage/send',);
         }
 
     }
