@@ -28,14 +28,14 @@ class Main
         ini_set('memory_limit', $_ENV['MEMORY_LIMIT']);
         BackupDatabaseService::load();
         CompressionDirectoryService::load();
-        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
-        SelectFileFoldersService::deleteFilesSQL(__APP__ . '/storage/dumps');
+        SelectFileFoldersService::moveZipFiles($_ENV['APP_DIRECTORIES'] . '/storage/dumps', $_ENV['APP_DIRECTORIES'] . '/storage/files');
+        SelectFileFoldersService::deleteFilesSQL($_ENV['APP_DIRECTORIES'] . '/storage/dumps');
         BackupDirectoryService::load();
-        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/dumps', __APP__ . '/storage/files');
-        SelectFileFoldersService::permanenceArchives(__APP__ . '/storage/send');
+        SelectFileFoldersService::moveZipFiles($_ENV['APP_DIRECTORIES'] . '/storage/dumps', $_ENV['APP_DIRECTORIES'] . '/storage/files');
+        SelectFileFoldersService::permanenceArchives($_ENV['APP_DIRECTORIES'] . '/storage/send');
         if ($_ENV["SHARE_GOOGLE_DRIVE"] == "YES") {
         SendGoogleDriveArchive::store();
-        SelectFileFoldersService::moveZipFiles(__APP__ . '/storage/files', __APP__ . '/storage/send',);
+        SelectFileFoldersService::moveZipFiles($_ENV['APP_DIRECTORIES'] . '/storage/files', $_ENV['APP_DIRECTORIES'] . '/storage/send',);
         }
 
     }

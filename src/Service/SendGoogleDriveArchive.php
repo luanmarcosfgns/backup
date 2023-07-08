@@ -12,14 +12,14 @@ class SendGoogleDriveArchive
     public static function store()
     {
         try {
-            $directory = __APP__ . '/storage/files';
+            $directory = $_ENV['APP_DIRECTORIES'] . '/storage/files';
             $files = BackupDirectoryService::listFiles($directory);
             foreach ($files as $fileName) {
                 $client = new Client();
 //                $client->setAccessToken($_ENV['GOOGLETOKEN']);
                 $client->getOAuth2Service()->generateCodeVerifier();
-                $dir = __APP__.'/credentials.json';
-                if(!is_file(__APP__.'/credentials.json')){
+                $dir = $_ENV['APP_DIRECTORIES'].'/credentials.json';
+                if(!is_file($_ENV['APP_DIRECTORIES'].'/credentials.json')){
                     echo "credencial não encontrada";
                     return false;
                 }
