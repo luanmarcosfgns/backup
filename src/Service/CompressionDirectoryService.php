@@ -10,12 +10,12 @@ class CompressionDirectoryService
 {
     public static function load()
     {
-        $files = self::listFiles(__APP__ . '/storage/dumps/');
+        $files = self::listFiles($_ENV['APP_DIRECTORIES'] . '/storage/dumps/');
         if (!empty($files)) {
             self::compressFile($files);
         }
 
-        $directories = self::listDiretory(__APP__ . '/storage/dumps/');
+        $directories = self::listDiretory($_ENV['APP_DIRECTORIES'] . '/storage/dumps/');
         if (!empty($directories)) {
             self::compressFile(self::compressDirectory($directories));
         }
@@ -91,7 +91,7 @@ class CompressionDirectoryService
 
         }
         $zip->close();
-        rename(__APP__ .'/'.$zipFile, __APP__ . '/storage/dumps/' . $zipFile);
+        rename($_ENV['APP_DIRECTORIES'] .'/'.$zipFile, $_ENV['APP_DIRECTORIES'] . '/storage/dumps/' . $zipFile);
     }
 
 
@@ -101,14 +101,14 @@ class CompressionDirectoryService
             $zip = new ZipArchive;
             $zip->open($file . '.zip', ZipArchive::CREATE);
             $zip->addFile(
-                __APP__ . '/storage/dumps/' . $file,
+                $_ENV['APP_DIRECTORIES'] . '/storage/dumps/' . $file,
                 $file
             );
 
 
 // Fecha a pasta e salva o arquivo
             $zip->close();
-            rename(__APP__ . '/' . $file . '.zip', __APP__ . '/storage/dumps/' . $file . '.zip');
+            rename($_ENV['APP_DIRECTORIES'] . '/' . $file . '.zip', $_ENV['APP_DIRECTORIES'] . '/storage/dumps/' . $file . '.zip');
         }
 
     }

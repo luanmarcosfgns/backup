@@ -15,7 +15,7 @@ class BackupDatabaseService
 
             $file = $database . '-' . $date . '-backup.sql';
 
-            $directoryTo = __APP__. '/storage/dumps/';
+            $directoryTo = $_ENV['APP_DIRECTORIES']. '/storage/dumps/';
 
             self::validDirectoryStorage($directoryTo);
 
