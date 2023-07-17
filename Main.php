@@ -22,10 +22,11 @@ class Main
 {
     public static function exec()
     {
-        VariableSystem::set();
+
         $dotenv = Dotenv::createMutable(__DIR__);
         $dotenv->safeLoad();
         ini_set('memory_limit', $_ENV['MEMORY_LIMIT']);
+        VariableSystem::set();
         BackupDatabaseService::load();
         CompressionDirectoryService::load();
         SelectFileFoldersService::moveZipFiles($_ENV['APP_DIRECTORIES'] . '/storage/dumps', $_ENV['APP_DIRECTORIES'] . '/storage/files');
